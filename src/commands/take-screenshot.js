@@ -1,4 +1,5 @@
-const kebabCase = require('lodash.kebabcase')
+import isEmpty from 'lodash.isempty'
+import utils from '../utils/index'
 
 /**
  * Take a screenshot and save it in a location specified in the config.
@@ -13,16 +14,16 @@ const kebabCase = require('lodash.kebabcase')
  * @param {String} [prefix = ''] File name prefix
  * @returns {vouchersCommands}
  */
-module.exports = function (prefix = '') {
+const takeScreenshot = function (prefix = '') {
   if (!this.api.options.screenshots) {
     return this
   }
 
   const location = this.api.options.screenshotsPath
-  const moduleName = getModuleName.bind(this)()
-  const stepName = getStepName.bind(this)()
+  const moduleName = utils.getModuleName.bind(this)()
+  const stepName = utils.getStepName.bind(this)()
   const timestamp = (new Date()).getTime()
-  const filename = _.isEmpty(prefix)
+  const filename = isEmpty(prefix)
       ? `${timestamp}.png`
       : `${prefix}-${timestamp}.png`
   const path = `${location}/${moduleName}/${stepName}/${filename}`
@@ -32,16 +33,4 @@ module.exports = function (prefix = '') {
   return this
 }
 
-function getModuleName () {
-  return this.client.api.currentTest.module
-}
-
-function getStepName () {
-  return kebabCase(this.client.api.currentTest.name)
-}
-
-function getSelector (identifier) {
-  return identifier[0] === '@'
-      ? this.elements[identifier.substring(1)].selector
-      : identifier
-}
+export default takeScreenshot

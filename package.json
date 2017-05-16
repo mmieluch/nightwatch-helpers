@@ -4,7 +4,9 @@
   "description": "Helpers for the Nightwatch.js testing framework.",
   "main": "index.js",
   "private": false,
-  "scripts": {},
+  "scripts": {
+    "build:commands": "rollup --config=build/commands.rollup.config.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mmieluch/nightwatch-helpers"
@@ -21,7 +23,14 @@
     "url": "https://github.com/mmieluch/nightwatch-helpers/issues"
   },
   "homepage": "https://github.com/mmieluch/nightwatch-helpers#readme",
-  "dependencies": {
-    "lodash.kebabcase": "^4.1.1"
+  "dependencies": {},
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "lodash.isempty": "^4.4.0",
+    "lodash.kebabcase": "^4.1.1",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0"
   }
 }
