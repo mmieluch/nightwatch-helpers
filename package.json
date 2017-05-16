@@ -7,6 +7,10 @@
   "scripts": {
     "build": "node build/build.js"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mmieluch/nightwatch-helpers"

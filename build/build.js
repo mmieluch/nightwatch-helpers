@@ -55,9 +55,9 @@ function createBuild (type, filename) {
 
   return rollup.rollup(conf).then(bundle => {
     const code = bundle.generate(conf).code
-    const minified = uglify.minify(code).code
+    // const minified = uglify.minify(code).code
 
-    return write(conf.dest, minified)
+    return write(conf.dest, code)
   })
 }
 
@@ -85,10 +85,10 @@ function write (dest, code) {
     fs.writeFile(dest, code, err => {
       if (err) return reject(err)
 
-      zlib.gzip(code, (err, zipped) => {
-        if (err) return reject(err)
-        report(' (gzipped: ' + getSize(zipped) + ')')
-      })
+      // zlib.gzip(code, (err, zipped) => {
+      //   if (err) return reject(err)
+      //   report(' (gzipped: ' + getSize(zipped) + ')')
+      // })
     })
   })
 }

@@ -1,5 +1,6 @@
 import isEmpty from 'lodash.isempty'
 import utils from '../utils/index'
+import {EventEmitter} from 'events'
 
 /**
  * Take a screenshot and save it in a location specified in the config.
@@ -14,23 +15,29 @@ import utils from '../utils/index'
  * @param {String} [prefix = ''] File name prefix
  * @returns {vouchersCommands}
  */
-const takeScreenshot = function (prefix = '') {
-  if (!this.api.options.screenshots) {
-    return this
+export default class TakeScreenshot extends EventEmitter {
+  constructor () {
+    super()
   }
 
-  const location = this.api.options.screenshotsPath
-  const moduleName = utils.getModuleName.bind(this)()
-  const stepName = utils.getStepName.bind(this)()
-  const timestamp = (new Date()).getTime()
-  const filename = isEmpty(prefix)
+  command (prefix = '') {
+    if (!this.api.options.screenshots) {
+      this.emit('complete')
+      return this
+    }
+
+    const location = this.api.options.screenshotsPath
+    const moduleName = utils.getModuleName.bind(this)()
+    const stepName = utils.getStepName.bind(this)()
+    const timestamp = (new Date()).getTime()
+    const filename = isEmpty(prefix)
       ? `${timestamp}.png`
       : `${prefix}-${timestamp}.png`
-  const path = `${location}/${moduleName}/${stepName}/${filename}`
+    const path = `${location}/${moduleName}/${stepName}/${filename}`
 
-  this.api.saveScreenshot(path)
+    this.api.saveScreenshot(path)
 
-  return this
+    this.emit('complete')
+    return this
+  }
 }
-
-export default takeScreenshot
