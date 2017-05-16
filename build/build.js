@@ -23,15 +23,9 @@ const root = process.cwd()
  */
 const paths = {
   build: `${root}/build`,
-  commands: `${root}/src/commands`,
+  src: `${root}/src`,
   dist: `${root}/dist`,
 }
-
-/**
- * Array of files in the commands directory.
- * @type {Array}
- */
-const commands = fs.readdirSync(paths.commands)
 
 // Drop dist directory
 if (fs.existsSync(paths.dist)) {
@@ -39,11 +33,24 @@ if (fs.existsSync(paths.dist)) {
 }
 // Re-create dist directory
 fs.mkdirSync(paths.dist)
+// Re-create commands directory
+fs.mkdirSync(`${paths.dist}/commands`)
+
+/**
+ * Array of files in the commands directory.
+ * @type {Array}
+ */
+const commands = fs.readdirSync(`${paths.src}/commands`)
+
 // Publish commands
 commands.forEach(command => {
+  return createBuild('commands', command).catch(report)
+})
+
+function createBuild (type, filename) {
   const conf = Object.assign({}, config, {
-    entry: `${paths.commands}/${command}`,
-    dest: `${paths.dist}/${command}`,
+    entry: `${paths.src}/${type}/${filename}`,
+    dest: `${paths.dist}/${type}/${filename}`,
   })
 
   return rollup.rollup(conf).then(bundle => {
@@ -52,7 +59,15 @@ commands.forEach(command => {
 
     return write(conf.dest, minified)
   })
-})
+}
+
+/**
+ * Write message to console. Handler for promises.
+ * @param {*} msg
+ */
+function report (msg) {
+  console.log(msg)
+}
 
 /**
  * Write minified code to file.

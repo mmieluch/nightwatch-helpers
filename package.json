@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": false,
   "scripts": {
-    "build:commands": "node build/build.js commands"
+    "build": "node build/build.js"
   },
   "repository": {
     "type": "git",
