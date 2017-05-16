@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Helpers for the Nightwatch.js testing framework.",
   "main": "index.js",
+  "private": false,
   "scripts": {},
   "repository": {
     "type": "git",
