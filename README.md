@@ -21,7 +21,9 @@ custom_commands_path: [
 ],
 ```
 
-**No custom assertions yet**, but they are coming. I simply didn't have time to put them in.
+## Assertions
+
+- count({string} selector, {number} expected, {string} [message = null])
 
 ## Commands
 
