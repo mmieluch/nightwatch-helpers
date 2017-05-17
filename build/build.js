@@ -35,6 +35,8 @@ if (fs.existsSync(paths.dist)) {
 fs.mkdirSync(paths.dist)
 // Re-create commands directory
 fs.mkdirSync(`${paths.dist}/commands`)
+// Re-create assertions directory
+fs.mkdirSync(`${paths.dist}/assertions`)
 
 /**
  * Array of files in the commands directory.
@@ -47,6 +49,23 @@ commands.forEach(command => {
   return createBuild('commands', command).catch(report)
 })
 
+/**
+ * Array of files in the assertions directory.
+ * @type {Array}
+ */
+const assertions = fs.readdirSync(`${paths.src}/assertions`)
+
+// Publish assertions
+assertions.forEach(assertion => {
+  return createBuild('assertions', assertion).catch(report)
+})
+
+/**
+ * Build a custom module.
+ * @param {string} type
+ * @param {string} filename
+ * @returns {Promise.<TResult>}
+ */
 function createBuild (type, filename) {
   const conf = Object.assign({}, config, {
     entry: `${paths.src}/${type}/${filename}`,
