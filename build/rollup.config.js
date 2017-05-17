@@ -8,6 +8,7 @@ const resolveCommonJS = require('rollup-plugin-commonjs')
  */
 const config = {
   format: 'cjs',
+  external: ['events'],
   plugins: [
     resolveCommonJS(),
     resolve(),
