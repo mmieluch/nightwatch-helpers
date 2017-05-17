@@ -30,10 +30,12 @@ export default class TakeScreenshot extends EventEmitter {
       ? `${timestamp}.png`
       : `${prefix}-${timestamp}.png`
     const path = `${location}/${moduleName}/${stepName}/${filename}`
+    const self = this
 
-    this.api.saveScreenshot(path)
+    this.api.saveScreenshot(path, function () {
+      self.emit('complete')
+    })
 
-    this.emit('complete')
     return this
   }
 }

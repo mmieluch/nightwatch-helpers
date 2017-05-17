@@ -1165,10 +1165,12 @@ var TakeScreenshot = function (_EventEmitter) {
       var timestamp = new Date().getTime();
       var filename = index(prefix) ? timestamp + '.png' : prefix + '-' + timestamp + '.png';
       var path = location + '/' + moduleName + '/' + stepName + '/' + filename;
+      var self = this;
 
-      this.api.saveScreenshot(path);
+      this.api.saveScreenshot(path, function () {
+        self.emit('complete');
+      });
 
-      this.emit('complete');
       return this;
     }
   }]);
