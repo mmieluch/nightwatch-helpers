@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events'
 import getSelector from '../utils/get-selector'
+import { isInteger } from 'lodash'
 
 /**
  * @class scrollTo
@@ -9,9 +10,10 @@ import getSelector from '../utils/get-selector'
 export default class scrollTo extends EventEmitter {
   /**
    * @param {string} [selector = null]
+   * @param {number} [offset = 0]
    * @returns {scrollTo}
    */
-  command (selector = null) {
+  command (selector = null, offset = 0) {
     // No selector === no work. Like me, but with coffee.
     if (selector === null) return this.complete()
     // Prepare to tell the world the job is done.
@@ -20,9 +22,9 @@ export default class scrollTo extends EventEmitter {
     const sel = getSelector(selector)
 
     // Establish the location of the element.
-    this.getLocation(sel)
+    this.calcY(sel, offset)
       // Set window position to the found coordinates.
-      .then(coordinates => this.scrollTo(coordinates.y))
+      .then(y => this.scrollTo(y))
       .then(emitComplete)
       .catch(err => {
         console.error(err)
@@ -52,21 +54,21 @@ export default class scrollTo extends EventEmitter {
   }
 
   /**
-   * Promisify `getLocation` function to avoid callback hell.
-   * @param selector
+   * Wrap `getLocation` in a promise to avoid callback hell.
+   * @param {string} selector
+   * @param {number} offset
    * @returns {Promise}
    */
-  getLocation (selector) {
+  calcY (selector, offset) {
     const self = this
 
     return new Promise(function (resolve, reject) {
       self.api.getLocation(selector, function (result) {
         if (result.status !== 0) reject(result)
 
-        resolve({
-          x: result.value.x,
-          y: result.value.y,
-        })
+        const y = isInteger(offset) ? result.value.y + offset : result.value.y
+
+        resolve(y)
       })
     })
   }
