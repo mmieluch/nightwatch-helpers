@@ -17,7 +17,7 @@ In the Nightwatch config:
 
 ```json
 custom_commands_path: [
-  "node_modules/@mmieluch/nightwatch-helpers/dist/commands",
+  'node_modules/@mmieluch/nightwatch-helpers/dist/commands',
 ],
 ```
 
