@@ -1,4 +1,4 @@
-import kebabCase from 'lodash.kebabcase'
+import {kebabCase} from 'lodash'
 
 const getStepName = function () {
   return kebabCase(this.client.api.currentTest.name)

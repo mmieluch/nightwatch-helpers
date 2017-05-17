@@ -1,4 +1,4 @@
-import isEmpty from 'lodash.isempty'
+import {isEmpty} from 'lodash'
 import utils from '../utils/index'
 import {EventEmitter} from 'events'
 
