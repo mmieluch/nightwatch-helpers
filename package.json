@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": false,
   "scripts": {
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "dev": "nodemon --watch src build/build"
   },
   "files": [
     "src",
@@ -30,9 +31,10 @@
   "dependencies": {},
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-lodash": "^3.2.11",
     "babel-preset-latest": "^6.24.1",
-    "lodash.isempty": "^4.4.0",
-    "lodash.kebabcase": "^4.1.1",
+    "lodash": "^4.17.4",
+    "nodemon": "^1.11.0",
     "rimraf": "^2.6.1",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
