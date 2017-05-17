@@ -16,10 +16,6 @@ import {EventEmitter} from 'events'
  * @returns {vouchersCommands}
  */
 export default class TakeScreenshot extends EventEmitter {
-  constructor () {
-    super()
-  }
-
   command (prefix = '') {
     if (!this.api.options.screenshots) {
       this.emit('complete')

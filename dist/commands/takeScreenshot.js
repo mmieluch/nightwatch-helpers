@@ -1146,7 +1146,7 @@ var TakeScreenshot = function (_EventEmitter) {
 
   function TakeScreenshot() {
     classCallCheck(this, TakeScreenshot);
-    return possibleConstructorReturn(this, (TakeScreenshot.__proto__ || Object.getPrototypeOf(TakeScreenshot)).call(this));
+    return possibleConstructorReturn(this, (TakeScreenshot.__proto__ || Object.getPrototypeOf(TakeScreenshot)).apply(this, arguments));
   }
 
   createClass(TakeScreenshot, [{
