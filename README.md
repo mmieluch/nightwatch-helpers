@@ -31,6 +31,14 @@ Assert a radio button is checked.
 
 Assert the number of elements found by `document.querySelectorAll(selector)` is equal to `expected`.
 
+### `disabled({string} selector, {string} [message = null])`
+
+Assert that the element is in disabled state.
+
+### `enabled({string} selector, {string} [message = null])`
+
+Assert that the element is in enabled state.
+
 ### `unchecked({string} selector, {string} [message = null])`
 
 Assert a radio button is not checked.
