@@ -483,7 +483,6 @@ var scrollTo = function (_EventEmitter) {
       var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      // No selector === no work. Like me, but with coffee.
       if (selector === null) return this.complete();
       // Prepare to tell the world the job is done.
       var emitComplete = this.emit.bind(this, 'complete');
