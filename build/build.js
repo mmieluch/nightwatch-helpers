@@ -2,8 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const rimraf = require('rimraf').sync
 const rollup = require('rollup')
-const uglify = require('uglify-js')
-const zlib = require('zlib')
 
 /**
  * Rollup configuration template.
@@ -66,18 +64,16 @@ assertions.forEach(assertion => {
  * @param {string} filename
  * @returns {Promise.<TResult>}
  */
-function createBuild (type, filename) {
+async function createBuild (type, filename) {
   const conf = Object.assign({}, config, {
     entry: `${paths.src}/${type}/${filename}`,
     dest: `${paths.dist}/${type}/${filename}`,
   })
 
-  return rollup.rollup(conf).then(bundle => {
-    const code = bundle.generate(conf).code
-    // const minified = uglify.minify(code).code
+  const bundle = await rollup.rollup(conf)
+  const code = await bundle.generate(conf).code
 
-    return write(conf.dest, code)
-  })
+  return write(conf.dest, code)
 }
 
 /**
@@ -103,11 +99,6 @@ function write (dest, code) {
 
     fs.writeFile(dest, code, err => {
       if (err) return reject(err)
-
-      // zlib.gzip(code, (err, zipped) => {
-      //   if (err) return reject(err)
-      //   report(' (gzipped: ' + getSize(zipped) + ')')
-      // })
     })
   })
 }
