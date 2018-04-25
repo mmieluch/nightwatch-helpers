@@ -1,6 +1,6 @@
 {
   "name": "@mmieluch/nightwatch-helpers",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Helpers for the Nightwatch.js testing framework.",
   "author": "Michał Mieluch <mieluch+npm@gmail.com>",
   "license": "MIT",
