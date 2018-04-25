@@ -2,11 +2,18 @@
   "name": "@mmieluch/nightwatch-helpers",
   "version": "0.0.8",
   "description": "Helpers for the Nightwatch.js testing framework.",
+  "author": "Michał Mieluch <mieluch+npm@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmieluch/nightwatch-helpers/issues"
+  },
+  "homepage": "https://github.com/mmieluch/nightwatch-helpers#readme",
   "main": "index.js",
   "private": false,
   "scripts": {
     "build": "node build/build.js",
-    "dev": "nodemon --watch src build/build"
+    "dev": "nodemon --watch src build/build",
+    "prebublish": "build"
   },
   "files": [
     "src",
@@ -22,12 +29,6 @@
     "helpers",
     "utils"
   ],
-  "author": "Michał Mieluch <mieluch+npm@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mmieluch/nightwatch-helpers/issues"
-  },
-  "homepage": "https://github.com/mmieluch/nightwatch-helpers#readme",
   "dependencies": {},
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
