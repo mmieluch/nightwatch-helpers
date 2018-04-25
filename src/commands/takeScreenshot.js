@@ -13,7 +13,7 @@ import {EventEmitter} from 'events'
  * Does not do anything if "screenshots" option is set to `false` in the config.
  *
  * @param {String} [prefix = ''] File name prefix
- * @returns {vouchersCommands}
+ * @returns {TakeScreenshot}
  */
 export default class TakeScreenshot extends EventEmitter {
   command (prefix = '') {

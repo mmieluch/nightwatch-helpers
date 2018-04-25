@@ -14,7 +14,6 @@ export default class scrollTo extends EventEmitter {
    * @returns {scrollTo}
    */
   command (selector = null, offset = 0) {
-    // No selector === no work. Like me, but with coffee.
     if (selector === null) return this.complete()
     // Prepare to tell the world the job is done.
     const emitComplete = this.emit.bind(this, 'complete')
